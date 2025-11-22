@@ -1,0 +1,20 @@
+# Ignorar carpetas de compilación y temporales de NetBeans y Java
+/build/
+/dist/
+nbproject/private/
+*.jar
+*.war
+*.zip
+
+# Ignorar archivos de NetBeans que son específicos de tu configuración local
+nbproject/
+!nbproject/project.xml
+!nbproject/build-impl.xml
+
+# Archivos generales de entornos IDE/Java
+.DS_Store
+.idea/
+.vscode/
+*.class
+# Ignorar logs, archivos temporales
+*.log
