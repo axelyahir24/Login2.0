@@ -46,6 +46,12 @@ public class ContactoDAO {
     }
 
     public boolean editar(Contacto c) {
+        // **MEJORA:** Comprobar que el ID sea válido antes de intentar editar
+        if (c.getIdContacto() <= 0) {
+            System.out.println("Error al editar: ID de contacto no válido.");
+            return false;
+        }
+        
         String sql = "UPDATE Contactos SET nombre=?, telefono=?, correo=? WHERE idContacto=?";
         try (Connection con = CConexion.conectar(); 
              PreparedStatement pst = con.prepareStatement(sql)) {
@@ -54,8 +60,9 @@ public class ContactoDAO {
             pst.setString(2, c.getTelefono());
             pst.setString(3, c.getCorreo());
             pst.setInt(4, c.getIdContacto());
-            pst.executeUpdate();
-            return true;
+            int filasActualizadas = pst.executeUpdate();
+            
+            return filasActualizadas > 0; // Retorna true si se actualizó al menos una fila
 
         } catch (SQLException e) {
             System.out.println("Error al editar: " + e.getMessage());
